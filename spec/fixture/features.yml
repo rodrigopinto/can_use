@@ -1,0 +1,7 @@
+defaults:
+  feature_one: true
+  feature_two: false
+development:
+  feature_two: true
+production:
+  feature_one: false
