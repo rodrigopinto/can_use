@@ -61,12 +61,12 @@ describe CanUse do
         end
       end
 
-      it "uses the defaults value" do
+      it "uses the defaults value when the key do not exist" do
         allowed = CanUse.feature?("feature_one")
         allowed.should be_true
       end
 
-      it "uses development environment if the key exists" do
+      it "uses development environment when the key exists" do
         allowed = CanUse.feature?("feature_two")
         allowed.should be_true
       end
