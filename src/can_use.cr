@@ -2,14 +2,12 @@ require "yaml"
 
 # CanUse is a minimalist feature toggle for Crystal.
 module CanUse
-  VERSION = "0.1.0"
+  VERSION = "0.2.0"
 
   @@features = Hash(YAML::Any, YAML::Any).new
   @@config = Config.new
 
   # Sets the configuration for `CanUse`
-  #
-  # ### Example
   #
   # ```
   # CanUse.configure do |config|
@@ -25,8 +23,6 @@ module CanUse
   # Returns `true` or `false` based on the feature configuration.
   # Otherwise, reads from the default value.
   #
-  # ### Example
-  #
   # ```
   # if CanUse.feature?("feature_one")
   #   # do_something
@@ -39,8 +35,6 @@ module CanUse
   end
 
   # Evaluates the block if the feature returns `true`..
-  #
-  # ### Example
   #
   # ```
   # CanUse.feature?("feature_one") do
@@ -55,8 +49,6 @@ module CanUse
 
   # Enables the feature and returns `true`.
   #
-  # ### Example
-  #
   # ```
   # CanUse.enable("feature_three") # => true
   # ```
@@ -65,8 +57,6 @@ module CanUse
   end
 
   # Disables the feature and returns `false`.
-  #
-  # ### Example
   #
   # ```
   # CanUse.disable("feature_two") # => false
