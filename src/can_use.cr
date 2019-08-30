@@ -61,7 +61,23 @@ module CanUse
   # CanUse.enable("feature_three") # => true
   # ```
   def self.enable(name : String)
-    features[YAML::Any.new(name)] = YAML::Any.new(true)
+    set_feature(name, true)
+  end
+
+  # Disables the feature and returns `false`.
+  #
+  # ### Example
+  #
+  # ```
+  # CanUse.disable("feature_two") # => false
+  # ```
+  def self.disable(name : String)
+    set_feature(name, false)
+  end
+
+  private def self.set_feature(name : String, value : Bool)
+    key = YAML::Any.new(name)
+    features[key] = YAML::Any.new(value)
   end
 
   private def self.features : Hash(YAML::Any, YAML::Any)
