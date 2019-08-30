@@ -12,11 +12,9 @@ describe CanUse do
   end
 
   describe ".feature?" do
-    CanUse.configure do |config|
-      config.file = "spec/fixture/features.yml"
-    end
-
     it "raises an error when a feature key does not exist" do
+      CanUse.configure { |c| c.file = "spec/fixture/features.yml" }
+
       expect_raises CanUse::Error, "does_not_exist not found" do
         CanUse.feature?("does_not_exist")
       end
@@ -55,18 +53,16 @@ describe CanUse do
     end
 
     context "when development environment defined" do
-      Spec.before_each do
-        CanUse.configure do |config|
-          config.environment = "development"
-        end
-      end
-
       it "uses the defaults value when the key do not exist" do
+        CanUse.configure { |c| c.environment = "development" }
+
         allowed = CanUse.feature?("feature_one")
         allowed.should be_true
       end
 
       it "uses development environment when the key exists" do
+        CanUse.configure { |c| c.environment = "development" }
+
         allowed = CanUse.feature?("feature_two")
         allowed.should be_true
       end
