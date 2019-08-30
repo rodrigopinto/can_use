@@ -32,7 +32,7 @@ module CanUse
   #   # do_something
   # end
   # ```
-  def self.feature?(name : String)
+  def self.feature?(name : YAML::Any::Type)
     features.fetch(name, defaults[name]).as_bool
   rescue KeyError
     raise Error.new("#{name} not found")
@@ -51,6 +51,17 @@ module CanUse
     return unless feature?(name)
 
     yield
+  end
+
+  # Enables the feature and returns `true`.
+  #
+  # ### Example
+  #
+  # ```
+  # CanUse.enable("feature_three") # => true
+  # ```
+  def self.enable(name : String)
+    features[YAML::Any.new(name)] = YAML::Any.new(true)
   end
 
   private def self.features : Hash(YAML::Any, YAML::Any)

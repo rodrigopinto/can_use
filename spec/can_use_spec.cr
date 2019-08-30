@@ -68,4 +68,27 @@ describe CanUse do
       end
     end
   end
+
+  describe ".enable" do
+    it "enables a feature that is turned off" do
+      CanUse.configure { |c| c.environment = "development" }
+
+      CanUse.feature?("feature_three").should be_false
+
+      CanUse.enable("feature_three")
+
+      CanUse.feature?("feature_three").should be_true
+    end
+
+    it "keeps enabled a feature that is turned on" do
+      CanUse.configure { |c| c.environment = "development" }
+
+      CanUse.feature?("feature_two").should be_true
+
+      CanUse.enable("feature_two")
+
+      CanUse.feature?("feature_two").should be_true
+    end
+  end
+  end
 end
