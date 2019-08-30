@@ -33,7 +33,7 @@ module CanUse
   # end
   # ```
   def self.feature?(name : String)
-    features.fetch(name, defaults[name]).raw
+    features.fetch(name, defaults[name]).as_bool
   rescue KeyError
     raise Error.new("#{name} not found")
   end
